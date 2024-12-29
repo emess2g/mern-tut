@@ -1,6 +1,7 @@
 import { useColorModeValue } from '@/components/ui/color-mode'
 import { useProductStore } from '@/store/product'
-import { Box, Button, Container, Heading, Input, VStack } from '@chakra-ui/react'
+import { Box, Button, Container, Heading, Input , VStack } from '@chakra-ui/react'
+import { Toaster, toaster } from "@/components/ui/toaster"
 import React, {useState } from 'react'
 
 const Create = () => {
@@ -14,15 +15,28 @@ const Create = () => {
     
     const handleAddProduct = async() => {
       const {success, message} = await createProduct(newProduct);
-      console.log(success, "Success");
-      console.log(message, "Message");
-      
-      
-    }
+       if(!success){
+        toaster.create({
+          title: "Error",
+          description: message,
+          status: "error",
+          isClosable: true
+        })}else{
+          toaster.create({
+            title: "Success",
+            description: message,
+            status: "success",
+            isClosable: true
+          })
+        }
+        setNewProduct({name: "", price: "", image: ""})
+      }
+
   return (
     <Container maxW={"xl"}>
+      <Toaster/>
        <VStack 
-       wordSpacing={8}>
+       m={8}>
         <Heading as={'h1'}
          textAlign={'center'} 
         size={'2xl'}
