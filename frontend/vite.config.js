@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://productstorebackend-m578zw9ec-emess2gs-projects.vercel.app", //localhost:5000 for local || Replace with your backend server URL if different
+        target: "https://productstorebackend.vercel.app", //localhost:5000 for local || Replace with your backend server URL if different
         changeOrigin: true, // Ensures the host header matches the target
         secure: false, // If your backend uses HTTPS without a valid certificate
       },
